@@ -1,13 +1,7 @@
 import { config, list } from '@keystone-6/core';
 import { allowAll } from '@keystone-6/core/access';
 import { text } from '@keystone-6/core/fields';
-
-/* if (process.env.NODE_ENV === 'test') {
-  configDotenv({path: './second.env'});
-  console.log(process.env.PSQL_URI);
-} else {
-  configDotenv();
-} */
+import 'dotenv/config'
 
 export default config({
   db: {
