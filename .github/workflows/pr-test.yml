@@ -36,5 +36,12 @@ jobs:
       - name: ls project
         run: ls
 
-      - name: bypassing test
-        run: echo 'bypassing test'
+      # Performs a clean installation of all dependencies in the `package.json` file
+      # For more information, see https://docs.npmjs.com/cli/ci.html
+      - name: Install dependencies
+        run: npm ci
+
+      - name: CI Test
+        run: npm test
+        env:
+          PSQL_URI: postgresql://postgres:postgres@localhost:5432
