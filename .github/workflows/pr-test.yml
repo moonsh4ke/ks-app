@@ -1,0 +1,14 @@
+name: PostgreSQL Service Example
+on: pull_request
+
+jobs:
+  # Label of the runner job
+  runner-job:
+    # You must use a Linux environment when using service containers or container jobs
+    runs-on: ubuntu-latest
+
+    steps:
+      # Performs a clean installation of all dependencies in the `package.json` file
+      # For more information, see https://docs.npmjs.com/cli/ci.html
+      - name: Hello world
+        run: echo 'Hello world from a pull request based event'
