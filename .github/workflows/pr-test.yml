@@ -10,5 +10,5 @@ jobs:
     steps:
       # Performs a clean installation of all dependencies in the `package.json` file
       # For more information, see https://docs.npmjs.com/cli/ci.html
-      - name: Hello world
+      - name: Hello world; ref ${{ github.ref }}; sha ${{ github.sha }}
         run: echo 'Hello world from a pull request based event'
