@@ -1,4 +1,4 @@
-name: PostgreSQL Service Example
+name: Pull request based pipeline
 on: pull_request
 
 jobs:
