@@ -26,5 +26,5 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
           port: ${{ secrets.PORT }}
-          script: echo "$HOST"
+          script: echo "$HOSTNAME"
         #   script: echo "docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}"
