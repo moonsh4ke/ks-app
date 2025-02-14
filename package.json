@@ -11,6 +11,7 @@
   },
   "scripts": {
     "test": "jest",
-    "dev": "npx keystone dev"
+    "dev": "npx keystone dev",
+    "start": "npx keystone build && npx keystone start"
   }
 }
