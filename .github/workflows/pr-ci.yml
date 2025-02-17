@@ -41,4 +41,4 @@ jobs:
       - name: CI Test
         run: npm test
         env:
-          PSQL_URI: postgresql://postgres:postgres@localhost:5432
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432

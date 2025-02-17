@@ -4,7 +4,7 @@ import { configDotenv } from "dotenv";
 // When testing using CI, the env should be set in the CI pipeline
 configDotenv({'path': './.env.local.test'})
 
-const dbUrl = `${process.env.PSQL_URI}/db_${process.env.JEST_WORKER_ID}`!;
+const dbUrl = `${process.env.DATABASE_URL}/db_${process.env.JEST_WORKER_ID}`!;
 
 declare global {
     var dbUrl: string;

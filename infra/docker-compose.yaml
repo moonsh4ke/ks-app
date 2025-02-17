@@ -1,6 +1,7 @@
 version: "3.3"
 
 services:
+
   traefik:
     image: "traefik:v3.3"
     container_name: "traefik"
@@ -16,13 +17,22 @@ services:
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
 
+  postgres-ks-app:
+    image: postgres
+    volumes:
+      - postgres-ks-app-data:/var/lib/postgresql/data
+    env_file:
+      - .env
+
   ks-app:
-    env_file: ".env"
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
-    image: ${IMAGE_URI}
+    image: ghcr.io/moonsh4ke/ks-app:master
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.test_app.rule=Host(`${APP_HOST}`)"
       - "traefik.http.routers.test_app.entrypoints=web"
       - "traefik.http.services.myservice.loadbalancer.server.port=${APP_PORT}"
+    env_file:
+      - .env
+
+volumes:
+  postgres-ks-app-data:

@@ -6,7 +6,7 @@ import 'dotenv/config'
 export default config({
   db: {
     provider: 'postgresql',
-    url: process.env.PSQL_URI!,
+    url: process.env.DATABASE_URL!,
   },
   lists: {
     User: list({

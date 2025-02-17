@@ -6,7 +6,7 @@ For local testing; use a docker container running postgresql:
 
 Then, add the database URI to .env.local.test; for the previous example it would be:
 
-    PSQL_URI='postgresql://postgres:mysecretpassword@localhost:5440'
+    DATABASE_URL ='postgresql://postgres:mysecretpassword@localhost:5440'
 
 Run the npm test script:
 
