@@ -12,8 +12,8 @@
   "scripts": {
     "test": "jest",
     "dev": "npx keystone dev",
-    "build": "npx keystone build && npx keystone prisma migrate deploy",
+    "build": "npx keystone build",
     "start": "npx keystone start",
-    "prod": "npm run build && npm run start"
+    "prod": "npx keystone prisma migrate deploy && npx keystone start"
   }
 }
