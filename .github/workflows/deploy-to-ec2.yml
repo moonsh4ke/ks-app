@@ -7,6 +7,7 @@ env:
     REGISTRY: ghcr.io
     IMAGE_NAME: ${{ github.repository }}
     BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
+    INFRA_DIR: /home/admin/infra
     COMPOSE_SERVICE_NAME: ks-app
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
@@ -29,9 +30,6 @@ jobs:
           key: ${{ secrets.KEY }}
           port: ${{ secrets.PORT }}
           script: |
-            echo multiline && \
-            echo script && \
-            echo test
-#            cd /home/admin/infra && \
-#            docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.BRANCH_NAME }} && \
-#            docker rollout ${{ env.COMPOSE_SERVICE_NAME }}
+            cd ${{ env.INFRA_DIR }} && \
+            docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.BRANCH_NAME }} && \
+            docker rollout ${{ env.COMPOSE_SERVICE_NAME }}
