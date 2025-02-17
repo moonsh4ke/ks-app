@@ -6,7 +6,7 @@ on: workflow_dispatch
 env:
     REGISTRY: ghcr.io
     IMAGE_NAME: ${{ github.repository }}
-    BRANCH_NAME: "${GITHUB_REF#refs/heads/}"
+    BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
