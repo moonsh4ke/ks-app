@@ -6,6 +6,7 @@ on: workflow_dispatch
 env:
     REGISTRY: ghcr.io
     IMAGE_NAME: ${{ github.repository }}
+    BRANCH_NAME: "${GITHUB_REF#refs/heads/}"
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -26,4 +27,4 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
           port: ${{ secrets.PORT }}
-          script: echo "docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}"
+          script: echo "docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.BRANCH_NAME }}"
