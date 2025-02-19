@@ -32,4 +32,5 @@ jobs:
           script: |
             cd ${{ env.INFRA_DIR }} && \
             docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.BRANCH_NAME }} && \
-            docker rollout ${{ env.COMPOSE_SERVICE_NAME }}
+            docker rollout ${{ env.COMPOSE_SERVICE_NAME }} && \
+            yes | docker image prune
