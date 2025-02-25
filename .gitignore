@@ -4,3 +4,4 @@ coverage
 test/datadir
 .keystone/
 .vscode
+pgbackrest.conf

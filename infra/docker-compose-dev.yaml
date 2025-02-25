@@ -1,0 +1,38 @@
+version: "3.3"
+
+services:
+
+  traefik:
+    image: "traefik:v3.3"
+    container_name: "traefik"
+    command:
+      #- "--log.level=DEBUG"
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entryPoints.web.address=:80"
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+
+  postgres-ks-app:
+    image: postgres:15-bullseyes
+    volumes:
+      - postgres-ks-app-data:/var/lib/postgresql/data
+    env_file:
+      - .env
+
+  ks-app:
+    image: ${APP_IMG}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.test_app.rule=Host(`${APP_HOST}`)"
+      - "traefik.http.routers.test_app.entrypoints=web"
+      - "traefik.http.services.myservice.loadbalancer.server.port=${APP_PORT}"
+    env_file:
+      - .env
+
+volumes:
+  postgres-ks-app-data:

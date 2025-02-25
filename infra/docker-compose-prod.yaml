@@ -18,14 +18,28 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
 
   postgres-ks-app:
-    image: postgres
+    image: pgplusbackup
     volumes:
-      - postgres-ks-app-data:/var/lib/postgresql/data
+      - ${PWD}/pgplusbackup/postgres.conf:/etc/postgresql/postgresql.conf
+      - ${PWD}/pgplusbackup/pgbackrest.conf:/etc/pgbackrest.conf
+      - ${DB_DATA_DIR}:/var/lib/postgresql/data
+      - ${PWD}/pgplusbackup/initdb:/docker-entrypoint-initdb.d
     env_file:
       - .env
+    command: ["-c", "config_file=/etc/postgresql/postgresql.conf"]
+
+    # To use postgres image without backup functionality:
+    # Comment/delete above configuration of this service and uncomment the
+    # following lines.
+    #
+    # image: postgres:15-bullseye
+    # env_file:
+    #   - .env
+    # volumes:
+    #   - ${DB_DATA_DIR}:/var/lib/postgresql/data
 
   ks-app:
-    image: ghcr.io/moonsh4ke/ks-app:master
+    image: ${APP_IMG}
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.test_app.rule=Host(`${APP_HOST}`)"
@@ -33,6 +47,3 @@ services:
       - "traefik.http.services.myservice.loadbalancer.server.port=${APP_PORT}"
     env_file:
       - .env
-
-volumes:
-  postgres-ks-app-data:

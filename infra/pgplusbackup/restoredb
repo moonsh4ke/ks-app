@@ -1,0 +1,14 @@
+#!/bin/bash
+
+_pgbackrest_cfg="$PWD/pgbackrest.conf"
+_postgres_data_dir="$PWD/pgdata"
+_stanza=main
+_pg_stanza_path=/var/lib/postgresql/data
+_pgback_img=pgplusbackup
+
+docker run --name pgrestore \
+	--entrypoint="" \
+        -v "$_pgbackrest_cfg":"/etc/pgbackrest.conf" \
+        -v "$_postgres_data_dir":"$_pg_stanza_path" \
+        $_pgback_img \
+        pgbackrest --stanza=$_stanza --log-level-console=info restore
